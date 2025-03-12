@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CodeZone.DataAccess.Models.Enrollment>
+@{
+    ViewData["Title"] = "Enrollments";
+}
+
+<h2>Enrollments</h2>
+<p><a asp-action="Create" class="btn btn-primary">Enroll Student</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var enrollment in Model)
+        {
+            <tr>
+                <td>@enrollment.Student.FullName</td>
+                <td>@enrollment.Course.Title</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@enrollment.Id" class="btn btn-sm btn-danger">
+                        Cancel Enrollment
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

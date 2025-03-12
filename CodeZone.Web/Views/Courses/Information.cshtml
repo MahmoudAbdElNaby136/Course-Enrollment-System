@@ -1,0 +1,27 @@
+﻿@model CodeZone.DataAccess.Models.Course
+
+@{
+    ViewData["Title"] = "Course Information";
+}
+
+<h2>Course Information</h2>
+
+<h3>@Model.Title</h3>
+<p>@Model.Description</p>
+
+<h4>Enrolled Students:</h4>
+@if (Model.Enrollments != null && Model.Enrollments.Any())
+{
+    <ul>
+        @foreach (var enrollment in Model.Enrollments)
+        {
+            <li>@enrollment.Student.FullName (@enrollment.Student.Email)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No students enrolled in this course.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back to Courses</a>

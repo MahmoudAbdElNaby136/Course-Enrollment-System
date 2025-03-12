@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CodeZone.DataAccess.Models.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+    int currentPage = ViewBag.Page;
+    int totalPages = ViewBag.TotalPages;
+}
+
+<h2>Courses</h2>
+<p><a asp-action="Create" class="btn btn-primary">Add New Course</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Max Capacity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Title</td>
+                <td>@course.Description</td>
+                <td>@course.MaxCapacity</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@course.Id" class="btn btn-sm btn-danger">Delete</a>
+                    <a asp-action="Information" asp-route-id="@course.Id" class="btn btn-sm btn-info">View Students</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

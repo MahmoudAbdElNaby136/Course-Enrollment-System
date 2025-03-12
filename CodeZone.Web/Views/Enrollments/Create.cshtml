@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Enroll Student";
+}
+
+<h2>Enroll Student</h2>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form asp-action="Create">
+    <label>Student</label>
+    <select name="studentId" class="form-control" asp-items="ViewBag.Students"></select>
+
+    <label>Course</label>
+    <select id="courseId" name="courseId" class="form-control" asp-items="ViewBag.Courses"></select>
+    <span id="available-slots" class="text-info"></span>
+    <br />
+    <button type="submit" class="btn btn-primary">Enroll</button>
+</form>
+
+@section Scripts {
+    <script>
+        $(function() {
+            $('#courseId').change(function() {
+                let courseId = $(this).val();
+                $('#available-slots').text('Checking...');
+
+                $.get('/Enrollments/GetAvailableSlots', { courseId }, function(data) {
+                    $('#available-slots').text(`Available Slots: ${data.availableSlots}`);
+                });
+            }).trigger('change');
+        });
+    </script>
+}

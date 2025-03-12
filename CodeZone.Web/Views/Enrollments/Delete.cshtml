@@ -1,0 +1,20 @@
+﻿@model CodeZone.DataAccess.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Confirm Enrollment Cancellation";
+}
+
+<h2>Confirm Enrollment Cancellation</h2>
+<p>Are you sure you want to cancel this enrollment?</p>
+
+<div>
+    <strong>Student:</strong> @Model.Student.FullName <br>
+    <strong>Course:</strong> @Model.Course.Title
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <button type="submit" class="btn btn-danger">Yes, Cancel Enrollment</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

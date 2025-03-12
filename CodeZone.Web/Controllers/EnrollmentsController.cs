@@ -20,11 +20,9 @@ namespace n_tier.Controllers
             _studentService = studentService;
         }
 
-        // GET: Enrollments
         public async Task<IActionResult> Index()
             => View(await _enrollmentService.GetAllEnrollmentsAsync());
 
-        // GET: Enrollments/Create
         public async Task<IActionResult> Create()
         {
             ViewBag.Students = new SelectList(await _studentService.GetAllStudentsAsync(), "Id", "FullName");
@@ -32,7 +30,6 @@ namespace n_tier.Controllers
             return View();
         }
 
-        // POST: Enrollments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int studentId, int courseId)
@@ -59,7 +56,6 @@ namespace n_tier.Controllers
             return View(enrollment);
         }
 
-        // POST: Perform deletion
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

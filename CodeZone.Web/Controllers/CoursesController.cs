@@ -31,10 +31,7 @@ namespace n_tier.Controllers
             return View(pagedCourses);
         }
 
-        //public async Task<IActionResult> Index()
-        //    => View(await _courseService.GetAllCoursesAsync());
-
-        // GET: Courses/Create
+        
         public IActionResult Create()
             => View();
 
@@ -60,7 +57,7 @@ namespace n_tier.Controllers
             // If validation fails, redisplay the form with errors
             return View(course);
         }
-// GET: Courses/Edit/5
+
 public async Task<IActionResult> Edit(int id)
         {
             var course = await _courseService.GetCourseByIdAsync(id);

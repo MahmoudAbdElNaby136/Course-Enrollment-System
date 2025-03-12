@@ -12,7 +12,6 @@ namespace codeZoneTask.Controllers
         public StudentsController(IStudentService studentService)
             => _studentService = studentService;
 
-        // GET: Students
         public async Task<IActionResult> Index(int? page)
         {
             int pageSize = 10; // Number of students per page
@@ -31,11 +30,9 @@ namespace codeZoneTask.Controllers
             return View(pagedStudents);
             
         }
-        // GET: Students/Create
         public IActionResult Create()
             => View();
 
-        // POST: Students/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Student student)
@@ -55,14 +52,12 @@ namespace codeZoneTask.Controllers
             return View(student);
         }
 
-        // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             var student = await _studentService.GetStudentByIdAsync(id);
             return student == null ? NotFound() : View(student);
         }
 
-        // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Student student)
@@ -88,14 +83,12 @@ namespace codeZoneTask.Controllers
             return View(student);
         }
 
-        // GET: Students/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
             var student = await _studentService.GetStudentByIdAsync(id);
             return student == null ? NotFound() : View(student);
         }
 
-        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

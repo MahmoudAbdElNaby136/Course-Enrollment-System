@@ -29,3 +29,9 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+.full-screen-img {
+    width: 80vw; /* Full screen width */
+    height: 80vh; /* Full screen height */
+    object-fit: contain; /* Ensures the whole image fits without cropping */
+    display: block;
+}

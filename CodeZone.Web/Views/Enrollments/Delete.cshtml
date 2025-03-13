@@ -4,17 +4,26 @@
     ViewData["Title"] = "Confirm Enrollment Cancellation";
 }
 
-<h2>Confirm Enrollment Cancellation</h2>
-<p>Are you sure you want to cancel this enrollment?</p>
-
-<div>
-    <strong>Student:</strong> @Model.Student.FullName <br>
-    <strong>Course:</strong> @Model.Course.Title
+<div class="container mt-4">
+    <h2 class="text-danger"><i class="fa-solid fa-user-slash"></i> Confirm Enrollment Cancellation</h2>
+    <div class="card shadow-sm p-4 border-danger">
+        <h3 class="text-center text-danger">Are you sure you want to cancel this enrollment?</h3>
+        <dl class="row mt-3">
+            <dt class="col-sm-3 fw-bold">Student</dt>
+            <dd class="col-sm-9">@Model.Student.FullName</dd>
+            <dt class="col-sm-3 fw-bold">Course</dt>
+            <dd class="col-sm-9">@Model.Course.Title</dd>
+        </dl>
+        <form asp-action="DeleteConfirmed" method="post" class="text-center">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div class="d-flex justify-content-between mt-3">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Yes, Cancel Enrollment
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-
-<form asp-action="DeleteConfirmed" method="post">
-    <input type="hidden" name="id" value="@Model.Id" />
-
-    <button type="submit" class="btn btn-danger">Yes, Cancel Enrollment</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>

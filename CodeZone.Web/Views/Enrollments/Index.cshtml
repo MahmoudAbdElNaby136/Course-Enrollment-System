@@ -1,32 +1,47 @@
 ﻿@model IEnumerable<CodeZone.DataAccess.Models.Enrollment>
+
 @{
     ViewData["Title"] = "Enrollments";
 }
 
-<h2>Enrollments</h2>
-<p><a asp-action="Create" class="btn btn-primary">Enroll Student</a></p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary"><i class="fa-solid fa-user-graduate"></i> Enrollments</h2>
+        <a asp-action="Create" class="btn btn-success shadow-sm">
+            <i class="fas fa-plus-circle me-1"></i> Enroll Student
+        </a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Course</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var enrollment in Model)
-        {
-            <tr>
-                <td>@enrollment.Student.FullName</td>
-                <td>@enrollment.Course.Title</td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@enrollment.Id" class="btn btn-sm btn-danger">
-                        Cancel Enrollment
-                    </a>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th><i class="fa-solid fa-user"></i> Student</th>
+                    <th><i class="fa-solid fa-book"></i> Course</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var enrollment in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@enrollment.Student.FullName</td>
+                        <td>@enrollment.Course.Title</td>
+                        <td class="text-center">
+                            <a asp-action="Delete" asp-route-id="@enrollment.Id" class="btn btn-sm btn-danger mx-1" title="Cancel Enrollment">
+                                <i class="fa-solid fa-trash"></i> Cancel
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa !important;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+</style>

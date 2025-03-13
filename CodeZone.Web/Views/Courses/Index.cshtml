@@ -6,34 +6,52 @@
     int totalPages = ViewBag.TotalPages;
 }
 
-<h2>Courses</h2>
-<p><a asp-action="Create" class="btn btn-primary">Add New Course</a></p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary"><i class="fas fa-book-open"></i> Courses</h2>
+        <a asp-action="Create" class="btn btn-success shadow-sm">
+            <i class="fas fa-plus-circle me-1"></i> Add New Course
+        </a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Max Capacity</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var course in Model)
-        {
-            <tr>
-                <td>@course.Title</td>
-                <td>@course.Description</td>
-                <td>@course.MaxCapacity</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@course.Id" class="btn btn-sm btn-danger">Delete</a>
-                    <a asp-action="Information" asp-route-id="@course.Id" class="btn btn-sm btn-info">View Students</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Max Capacity</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@course.Title</td>
+                        <td>@course.Description</td>
+                        <td class="text-center">@course.MaxCapacity</td>
+                        <td class="text-center">
 
-<!-- Pagination Partial -->
-@await Html.PartialAsync("_Pagination", (currentPage, totalPages, "Index"))
+                            <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-sm btn-warning mx-1" title="Edit">
+                                <i class="fa-solid fa-edit"></i>
+                            </a>
+                            <a asp-action="Information" asp-route-id="@course.Id" class="btn btn-sm btn-primary mx-1" title="View Students">
+                                <i class="fa-solid fa-info-circle"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@course.Id" class="btn btn-sm btn-danger mx-1" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-3">
+        @await Html.PartialAsync("_Pagination", (currentPage, totalPages, "Index"))
+    </div>
+</div>

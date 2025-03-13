@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CodeZone.DataAccess.Models.Student>
+﻿
+@model IEnumerable<CodeZone.DataAccess.Models.Student>
 
 @{
     ViewData["Title"] = "Students";
@@ -6,35 +7,53 @@
     int totalPages = ViewBag.TotalPages;
 }
 
-<h2>Students</h2>
-<p><a asp-action="Create" class="btn btn-primary">Add New Student</a></p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary"><i class="fas fa-users"></i> Students</h2>
+        <a asp-action="Create" class="btn btn-success shadow-sm">
+            <i class="fas fa-user-plus me-1"></i> Add New Student
+        </a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Birthdate</th>
-            <th>Phone Number</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var student in Model)
-        {
-            <tr>
-                <td>@student.FullName</td>
-                <td>@student.Email</td>
-                <td>@student.Birthdate.ToShortDateString()</td>
-                <td>@student.PhoneNumber</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Birthdate</th>
+                    <th>Phone Number</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>
+                            <span class="fw-bold">@student.FullName</span>
+                        </td>
+                        <td>
+                            <span class="fw-bold">@student.Email</span>
+                        </td>
+                        <td>@student.Birthdate.ToString("MMM dd, yyyy")</td>
+                        <td>@student.PhoneNumber</td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-warning mx-1" title="Edit">
+                                <i class="fa-solid fa-user-pen"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-danger mx-1" title="Delete">
+                                <i class="fa-solid fa-user-slash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<!-- Pagination Partial -->
-@await Html.PartialAsync("_Pagination", (currentPage, totalPages, "Index"))
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-3">
+        @await Html.PartialAsync("_Pagination", (currentPage, totalPages, "Index"))
+    </div>
+</div>
